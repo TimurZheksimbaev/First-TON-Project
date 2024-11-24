@@ -1,11 +1,12 @@
-import './App.css'
-import { TonConnectButton } from "@tonconnect/ui-react"
+import React from 'react';
+import { TonConnectButton } from "@tonconnect/ui-react";
+import { fromNano } from 'ton-core';
+import { useMainContract } from './hooks/useMainContract';
+import { useTonConnect } from './hooks/useTonConnect';
+import './App.css';
+import './style.css'
 
-import { useMainContract } from './hooks/useMainContract'
-import { useTonConnect } from './hooks/useTonConnect'
-import { fromNano } from 'ton-core'
-
-function App() {
+const App = () => {
   const {
     contract_address,
     contract_balance,
@@ -13,51 +14,66 @@ function App() {
     sendIncrement,
     sendDeposit,
     sendWithdraw
-  } = useMainContract()
+  } = useMainContract();
 
+  const { connected } = useTonConnect();
 
-
-  const { connected } = useTonConnect()
   return (
-    <div>
-      <div>
+    <div className="container">
+      <div className="connect-button">
         <TonConnectButton />
       </div>
 
-      <div>
-        <div className='Card'>
-          <b>Our contract Address</b>
-          <div className='Hint'>{contract_address?.slice(0, 30) + "..."}</div>
-          <b>Our contract Balance</b>
-          {contract_balance && (
-            <div className='Hint'>{fromNano(contract_balance)}</div>
-          )}
+      <div className="content">
+        <div className="card">
+          <h2 className="card-title">Contract Details</h2>
+          
+          <div className="card-content">
+            <div className="detail-item">
+              <h3>Contract Address</h3>
+              <p className="mono">{contract_address?.slice(0, 30) + "..."}</p>
+            </div>
 
-          <div className='Card'>
-            <b>Counter value</b>
-            <div>{counter_value ?? "Loading..."}</div>
+            <div className="detail-item">
+              <h3>Contract Balance</h3>
+              <p className="balance">
+                {contract_balance ? `${fromNano(contract_balance)} TON` : "Loading..."}
+              </p>
+            </div>
+
+            <div className="detail-item counter">
+              <h3>Counter Value</h3>
+              <p className="counter-value">
+                {counter_value ?? "Loading..."}
+              </p>
+            </div>
           </div>
         </div>
 
         {connected && (
-          <a onClick={() => sendIncrement()}> Increment by 5 </a>
+          <div className="button-group">
+            <button onClick={() => sendIncrement()} className="btn btn-blue">
+              Increment by 5
+            </button>
+
+            <button onClick={() => sendDeposit()} className="btn btn-green">
+              Deposit 1 TON
+            </button>
+
+            <button onClick={() => sendWithdraw()} className="btn btn-purple">
+              Request 0.7 TON withdraw
+            </button>
+          </div>
         )}
 
-        <br />
-        {connected && (
-          <a onClick={() => sendDeposit()}> Deposit 1 TON </a>
+        {!connected && (
+          <div className="connect-message">
+            <p>Connect your wallet to interact with the contract</p>
+          </div>
         )}
-
-        <br />
-        {connected && (
-          <a onClick={() => {
-            sendWithdraw()
-          }}> Request 0.7 TON wthdraw </a>
-        )}
-
       </div>
-    </div>     
-  )
-}
+    </div>
+  );
+};
 
-export default App
+export default App;
