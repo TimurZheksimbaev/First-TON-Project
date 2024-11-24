@@ -1,4 +1,3 @@
-import React from 'react';
 import { TonConnectButton } from "@tonconnect/ui-react";
 import { fromNano } from 'ton-core';
 import { useMainContract } from './hooks/useMainContract';
