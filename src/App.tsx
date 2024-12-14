@@ -4,6 +4,7 @@ import { useMainContract } from './hooks/useMainContract';
 import { useTonConnect } from './hooks/useTonConnect';
 import './App.css';
 import './style.css'
+import WebApp from "@twa-dev/sdk";
 
 const App = () => {
   const {
@@ -17,11 +18,17 @@ const App = () => {
 
   const { connected } = useTonConnect();
 
+  const showAlert = () => {
+    WebApp.showAlert("Hey there!")
+  }
+
   return (
     <div className="container">
       <div className="connect-button">
         <TonConnectButton />
       </div>
+
+
 
       <div className="content">
         <div className="card">
@@ -29,6 +36,7 @@ const App = () => {
           
           <div className="card-content">
             <div className="detail-item">
+              <b>{WebApp.platform}</b>
               <h3>Contract Address</h3>
               <p className="mono">{contract_address?.slice(0, 30) + "..."}</p>
             </div>
@@ -48,6 +56,12 @@ const App = () => {
             </div>
           </div>
         </div>
+
+        <button onClick={() => showAlert()} className="btn btn-blue">
+              Show Alert
+        </button>
+
+        <br />
 
         {connected && (
           <div className="button-group">
