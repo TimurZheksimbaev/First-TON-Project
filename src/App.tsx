@@ -6,7 +6,9 @@ import './App.css';
 import './style.css'
 import WebApp from "@twa-dev/sdk";
 
+
 const App = () => {
+  
   const {
     contract_address,
     contract_balance,
@@ -21,6 +23,10 @@ const App = () => {
   const showAlert = () => {
     WebApp.showAlert("Hey there!")
   }
+
+  WebApp.BackButton.onClick(() => {
+    WebApp.showAlert("You clicked the back button!")
+  })
 
   return (
     <div className="container">
