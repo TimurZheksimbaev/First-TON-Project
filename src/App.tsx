@@ -26,7 +26,7 @@ const App = () => {
   }
 
   if (!WebApp.SettingsButton.isVisible) {
-    WebApp.SettingsButton.show();
+    WebApp.SettingsButton.hide();
   }
 
 
