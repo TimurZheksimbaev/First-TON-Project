@@ -24,6 +24,11 @@ const App = () => {
   const showAlert = () => {
     WebApp.showAlert("Hey !")
   }
+  
+  if (!WebApp.SettingsButton.isVisible) {
+    WebApp.SettingsButton.show()
+  }
+
 
   WebApp.SettingsButton.onClick(() => {
     WebApp.showPopup({title: "Settings", message: "You clicked settings button", buttons: [{type: "ok"}]})
