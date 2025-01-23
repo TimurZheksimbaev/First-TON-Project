@@ -21,12 +21,10 @@ const App = () => {
   const { connected } = useTonConnect();
 
   const showAlert = () => {
-    WebApp.showAlert("Hey there!")
+    WebApp.showAlert("Hey !")
   }
 
-  WebApp.SettingsButton.onClick(() => {
-    WebApp.showAlert("Settings button clicked")
-  })
+  WebApp.BackButton.hide()
 
   return (
     <div className="container">
