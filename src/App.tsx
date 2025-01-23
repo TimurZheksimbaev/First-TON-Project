@@ -5,7 +5,7 @@ import { useTonConnect } from './hooks/useTonConnect';
 import './App.css';
 import './style.css'
 import WebApp from "@twa-dev/sdk";
-import { useEffect } from "react";
+
 
 
 const App = () => {
