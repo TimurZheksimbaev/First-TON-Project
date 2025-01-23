@@ -5,6 +5,7 @@ import { useTonConnect } from './hooks/useTonConnect';
 import './App.css';
 import './style.css'
 import WebApp from "@twa-dev/sdk";
+import { useEffect } from "react";
 
 
 const App = () => {
@@ -24,7 +25,10 @@ const App = () => {
     WebApp.showAlert("Hey !")
   }
 
-  WebApp.BackButton.hide()
+  useEffect(() =>{
+    WebApp.SettingsButton.hide()
+  })
+  
 
   return (
     <div className="container">
