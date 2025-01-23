@@ -25,10 +25,10 @@ const App = () => {
     WebApp.showAlert("Hey !")
   }
 
-  useEffect(() =>{
-    WebApp.SettingsButton.hide()
-  })
-  
+  if (!WebApp.SettingsButton.isVisible) {
+    WebApp.SettingsButton.show();
+  }
+
 
   return (
     <div className="container">
