@@ -26,7 +26,7 @@ const App = () => {
   }
 
   WebApp.SettingsButton.onClick(() => {
-    WebApp.showAlert("Settings button clicked")
+    WebApp.showPopup({title: "Settings", message: "You clicked settings button", buttons: [{type: "ok"}]})
   })
 
 
