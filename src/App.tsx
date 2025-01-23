@@ -24,7 +24,9 @@ const App = () => {
     WebApp.showAlert("Hey there!")
   }
 
-  WebApp.SettingsButton.isVisible = false;
+  WebApp.SettingsButton.onClick(() => {
+    WebApp.showAlert("Settings button clicked")
+  })
 
   return (
     <div className="container">
