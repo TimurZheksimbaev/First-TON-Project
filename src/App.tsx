@@ -16,7 +16,8 @@ const App = () => {
     counter_value,
     sendIncrement,
     sendDeposit,
-    sendWithdraw
+    sendWithdraw,
+    sendTx
   } = useMainContract();
 
   const { connected } = useTonConnect();
@@ -88,6 +89,10 @@ const App = () => {
 
             <button onClick={() => sendWithdraw()} className="btn btn-purple">
               Request 0.7 TON withdraw
+            </button>
+
+            <button onClick={() => sendTx()} className="btn btn-orange">
+              Send 0.1 TON to another address
             </button>
           </div>
         )}

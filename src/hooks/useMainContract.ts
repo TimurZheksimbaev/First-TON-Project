@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { MainContract } from "../contracts/MainContract";
 import { useTonClient } from "./useTonClient";
 import { useAsyncInitialize } from "./useAsyncInitialize";
-import { Address, OpenedContract, toNano } from "ton-core";
+import { Address, OpenedContract, SendMode, toNano } from "ton-core";
 import { useTonConnect } from "./useTonConnect";
 
 
@@ -58,6 +58,12 @@ export function useMainContract() {
     },
     sendWithdraw: async () => {
         return mainContract?.sendWithdrawalRequest(sender, toNano("0.05"), toNano("0.7"))
+    },
+    sendTx: async () => {
+        return sender.send({
+            value: toNano("0.1"),
+            to: Address.parse("0QDaNVh0t5Ek3Haj0yOdwryUq4gSBWFVkRKPCiYlRgN5exlj"),
+        })
     }
   };
 }
