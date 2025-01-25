@@ -5,15 +5,9 @@ import { useTonConnect } from './hooks/useTonConnect';
 import './App.css';
 import './style.css'
 import WebApp from "@twa-dev/sdk";
-import { init, miniApp } from "@telegram-apps/sdk";
+
 // import Header from "./components/Header";
 // import { setMiniAppHeaderColor } from "@telegram-apps/sdk";
-
-init()
-
-miniApp.mount()
-miniApp.setHeaderColor("#1C1D22")
-miniApp.ready()
 
 const App = () => {
   const {
