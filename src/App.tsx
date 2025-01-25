@@ -5,12 +5,12 @@ import { useTonConnect } from './hooks/useTonConnect';
 import './App.css';
 import './style.css'
 import WebApp from "@twa-dev/sdk";
-import { useEffect } from "react";
+import { miniApp } from "@telegram-apps/sdk";
 // import Header from "./components/Header";
+// import { setMiniAppHeaderColor } from "@telegram-apps/sdk";
 
 
 const App = () => {
-  
   const {
     contract_address,
     contract_balance,
@@ -22,26 +22,23 @@ const App = () => {
   } = useMainContract();
 
   const { connected } = useTonConnect();
+
+  miniApp.ready();
+
+  // const showAlert = () => {
+  //   WebApp.showAlert("Hey !")
+  // }
   
-  useEffect(() => {
-    WebApp.requestFullscreen()
-    WebApp.setHeaderColor("#1C1D22")
-  }, [])
-
-  const showAlert = () => {
-    WebApp.showAlert("Hey !")
-  }
-  
-  if (!WebApp.SettingsButton.isVisible) {
-    WebApp.SettingsButton.show()
-  }
+  // if (!WebApp.SettingsButton.isVisible) {
+  //   WebApp.SettingsButton.show()
+  // }
 
 
-  WebApp.SettingsButton.onClick(() => {
-    WebApp.showPopup({title: "Settings", message: "You clicked settings button", buttons: [{type: "ok"}]})
-  })
+  // WebApp.SettingsButton.onClick(() => {
+  //   WebApp.showPopup({title: "Settings", message: "You clicked settings button", buttons: [{type: "ok"}]})
+  // })
 
-
+  miniApp.setHeaderColor("#1C1D22")
 
   return (
     <div className="container">
@@ -79,9 +76,9 @@ const App = () => {
           </div>
         </div>
 
-        <button onClick={() => showAlert()} className="btn btn-blue">
+        {/* <button onClick={() => showAlert()} className="btn btn-blue">
               Show Alert
-        </button>
+        </button> */}
 
         <br />
 
