@@ -6,3 +6,10 @@
     inset: 0 0 auto 0;
     z-index: 1000;
 }
+
+.money {
+    padding-top: 60px;
+    position: fixed;
+    right: 60px;
+    color: white;
+}

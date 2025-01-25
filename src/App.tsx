@@ -5,7 +5,7 @@ import { useTonConnect } from './hooks/useTonConnect';
 import './App.css';
 import './style.css'
 import WebApp from "@twa-dev/sdk";
-// import Header from "./components/Header";
+import Header from "./components/Header";
 
 
 const App = () => {
@@ -28,8 +28,6 @@ const App = () => {
     WebApp.SettingsButton.show()
   }
 
-  WebApp.setBackgroundColor("#141319")
-  WebApp.setHeaderColor(WebApp.backgroundColor as "bg_color")
 
   WebApp.SettingsButton.onClick(() => {
     WebApp.showPopup({title: "Settings", message: "You clicked settings button", buttons: [{type: "ok"}]})
@@ -37,7 +35,7 @@ const App = () => {
 
   return (
     <div className="container">
-      {/* <Header /> */}
+      <Header />
 
       <div className="connect-button">
         <TonConnectButton />
