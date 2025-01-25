@@ -5,11 +5,16 @@ import { useTonConnect } from './hooks/useTonConnect';
 import './App.css';
 import './style.css'
 import WebApp from "@twa-dev/sdk";
-import { init, setMiniAppHeaderColor, requestFullscreen } from "@telegram-apps/sdk";
+import { init, miniApp } from "@telegram-apps/sdk";
 // import Header from "./components/Header";
 // import { setMiniAppHeaderColor } from "@telegram-apps/sdk";
 
 init()
+
+miniApp.mount()
+miniApp.setHeaderColor("#1C1D22")
+miniApp.ready()
+
 const App = () => {
   const {
     contract_address,
@@ -35,8 +40,6 @@ const App = () => {
   // WebApp.SettingsButton.onClick(() => {
   //   WebApp.showPopup({title: "Settings", message: "You clicked settings button", buttons: [{type: "ok"}]})
   // })
-
-  setMiniAppHeaderColor("#1C1D22")
 
   return (
     <div className="container">
