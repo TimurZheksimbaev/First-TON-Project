@@ -62,7 +62,7 @@ export function useMainContract() {
     sendTx: async () => {
         return sender.send({
             value: toNano("0.1"),
-            to: Address.parse("0QDaNVh0t5Ek3Haj0yOdwryUq4gSBWFVkRKPCiYlRgN5exlj"),
+            to: Address.parse("UQCqoGmED2IEitG9jSQlHz3OFhGiaygoN2EPlOldnxt27Tiq"),
         })
     }
   };

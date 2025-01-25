@@ -5,7 +5,7 @@ import { useTonConnect } from './hooks/useTonConnect';
 import './App.css';
 import './style.css'
 import WebApp from "@twa-dev/sdk";
-
+import Header from "./components/Header";
 
 
 const App = () => {
@@ -38,6 +38,7 @@ const App = () => {
 
   return (
     <div className="container">
+      <Header />
       <div className="connect-button">
         <TonConnectButton />
       </div>
