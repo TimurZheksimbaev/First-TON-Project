@@ -5,9 +5,8 @@ import { useTonConnect } from './hooks/useTonConnect';
 import './App.css';
 import './style.css'
 import WebApp from "@twa-dev/sdk";
+import Header from "./components/Header";
 
-// import Header from "./components/Header";
-// import { setMiniAppHeaderColor } from "@telegram-apps/sdk";
 
 const App = () => {
   const {
@@ -22,22 +21,25 @@ const App = () => {
 
   const { connected } = useTonConnect();
 
-  // const showAlert = () => {
-  //   WebApp.showAlert("Hey !")
-  // }
+  WebApp.setHeaderColor("#1C1D22")
+
+  const showAlert = () => {
+    WebApp.showAlert("Hey !")
+  }
   
-  // if (!WebApp.SettingsButton.isVisible) {
-  //   WebApp.SettingsButton.show()
-  // }
+  if (!WebApp.SettingsButton.isVisible) {
+    WebApp.SettingsButton.show()
+  }
 
 
-  // WebApp.SettingsButton.onClick(() => {
-  //   WebApp.showPopup({title: "Settings", message: "You clicked settings button", buttons: [{type: "ok"}]})
-  // })
+  WebApp.SettingsButton.onClick(() => {
+    WebApp.showPopup({title: "Settings", message: "You clicked settings button", buttons: [{type: "ok"}]})
+  })
 
   return (
     <div className="container">
-      {/* <Header /> */}
+      <Header />
+
       <div className="connect-button">
         <TonConnectButton />
       </div>
@@ -71,9 +73,9 @@ const App = () => {
           </div>
         </div>
 
-        {/* <button onClick={() => showAlert()} className="btn btn-blue">
+        <button onClick={() => showAlert()} className="btn btn-blue">
               Show Alert
-        </button> */}
+        </button>
 
         <br />
 

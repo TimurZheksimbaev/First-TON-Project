@@ -19,9 +19,8 @@
   .connect-button {
     position: absolute;
     top: 80px;
-    right: 0px;
-    transform: scale(1.25);
-    z-index: 10;
+    right: 20px;
+    transform: scale(1.2);
   }
   
   .content {
@@ -30,7 +29,7 @@
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    padding-top: 60px;
+    padding-top: 120px;
   }
   
   .card {
