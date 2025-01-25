@@ -5,10 +5,13 @@ import { useTonConnect } from './hooks/useTonConnect';
 import './App.css';
 import './style.css'
 import WebApp from "@twa-dev/sdk";
-import { miniApp } from "@telegram-apps/sdk";
+import { init, miniApp } from "@telegram-apps/sdk";
 // import Header from "./components/Header";
 // import { setMiniAppHeaderColor } from "@telegram-apps/sdk";
 
+init()
+miniApp.mount()
+miniApp.ready()
 
 const App = () => {
   const {
@@ -22,8 +25,6 @@ const App = () => {
   } = useMainContract();
 
   const { connected } = useTonConnect();
-
-  miniApp.ready();
 
   // const showAlert = () => {
   //   WebApp.showAlert("Hey !")
