@@ -2,15 +2,16 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import { TonConnectUIProvider } from '@tonconnect/ui-react'
-import {mockTelegramEnv, miniApp} from "@telegram-apps/sdk"
+import {mockTelegramEnv, miniApp, requestFullscreen} from "@telegram-apps/sdk"
 
 const manifestUrl = 'https://timurzheksimbaev.github.io/First-TON-Project/tonconnect-manifest.json'
 
 const initializeTelegramSDK = () => {
   try {
-    miniApp.mount()
+    requestFullscreen()
     miniApp.ready();
     miniApp.setHeaderColor('#1C1D22');
+    miniApp.mount()
   } catch (error) {
     
     mockTelegramEnv({
