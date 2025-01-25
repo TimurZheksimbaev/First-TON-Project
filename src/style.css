@@ -19,7 +19,7 @@
   .connect-button {
     position: absolute;
     top: 80px;
-    right: 20px;
+    right: 0px;
     transform: scale(1.25);
     z-index: 10;
   }

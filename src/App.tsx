@@ -5,7 +5,7 @@ import { useTonConnect } from './hooks/useTonConnect';
 import './App.css';
 import './style.css'
 import WebApp from "@twa-dev/sdk";
-import Header from "./components/Header";
+// import Header from "./components/Header";
 
 
 const App = () => {
@@ -35,10 +35,13 @@ const App = () => {
     WebApp.showPopup({title: "Settings", message: "You clicked settings button", buttons: [{type: "ok"}]})
   })
 
+  WebApp.setHeaderColor("#1C1D22")
+  WebApp.requestFullscreen()
+
 
   return (
     <div className="container">
-      <Header />
+      {/* <Header /> */}
       <div className="connect-button">
         <TonConnectButton />
       </div>
