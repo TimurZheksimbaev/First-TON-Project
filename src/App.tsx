@@ -28,7 +28,8 @@ const App = () => {
     WebApp.SettingsButton.show()
   }
 
-  WebApp.setHeaderColor(WebApp.backgroundColor as "bg_color")
+  WebApp.setBackgroundColor(WebApp.backgroundColor as "#141319")
+  WebApp.setHeaderColor(WebApp.headerColor as "#1C1D22")
 
   WebApp.SettingsButton.onClick(() => {
     WebApp.showPopup({title: "Settings", message: "You clicked settings button", buttons: [{type: "ok"}]})
