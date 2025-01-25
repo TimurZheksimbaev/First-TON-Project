@@ -5,7 +5,7 @@ import { useTonConnect } from './hooks/useTonConnect';
 import './App.css';
 import './style.css'
 import WebApp from "@twa-dev/sdk";
-import { init, miniApp } from "@telegram-apps/sdk";
+import { init, miniApp, requestFullscreen } from "@telegram-apps/sdk";
 // import Header from "./components/Header";
 // import { setMiniAppHeaderColor } from "@telegram-apps/sdk";
 
@@ -39,6 +39,7 @@ const App = () => {
   //   WebApp.showPopup({title: "Settings", message: "You clicked settings button", buttons: [{type: "ok"}]})
   // })
 
+  requestFullscreen()
   miniApp.setHeaderColor("secondary_bg_color")
 
   return (
