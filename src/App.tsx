@@ -22,6 +22,11 @@ const App = () => {
   } = useMainContract();
 
   const { connected } = useTonConnect();
+  
+  useEffect(() => {
+    WebApp.requestFullscreen()
+    WebApp.setHeaderColor("#1C1D22")
+  }, [])
 
   const showAlert = () => {
     WebApp.showAlert("Hey !")
@@ -36,10 +41,6 @@ const App = () => {
     WebApp.showPopup({title: "Settings", message: "You clicked settings button", buttons: [{type: "ok"}]})
   })
 
-  useEffect(() => {
-    WebApp.setHeaderColor("#1C1D22")
-    WebApp.requestFullscreen()
-  }, [])
 
 
   return (
