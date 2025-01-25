@@ -5,6 +5,7 @@ import { useTonConnect } from './hooks/useTonConnect';
 import './App.css';
 import './style.css'
 import WebApp from "@twa-dev/sdk";
+import { useEffect } from "react";
 // import Header from "./components/Header";
 
 
@@ -35,8 +36,10 @@ const App = () => {
     WebApp.showPopup({title: "Settings", message: "You clicked settings button", buttons: [{type: "ok"}]})
   })
 
-  WebApp.setHeaderColor("#1C1D22")
-  WebApp.requestFullscreen()
+  useEffect(() => {
+    WebApp.setHeaderColor("#1C1D22")
+    WebApp.requestFullscreen()
+  }, [])
 
 
   return (
