@@ -39,7 +39,7 @@ const App = () => {
   //   WebApp.showPopup({title: "Settings", message: "You clicked settings button", buttons: [{type: "ok"}]})
   // })
 
-  miniApp.setHeaderColor("#1C1D22")
+  miniApp.setHeaderColor("secondary_bg_color")
 
   return (
     <div className="container">
