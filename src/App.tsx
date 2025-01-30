@@ -105,7 +105,7 @@ const App = () => {
         <TonConnectButton />
       </div>
 
-
+      <div></div>
 
       <div className="content">
         <div className="card">
