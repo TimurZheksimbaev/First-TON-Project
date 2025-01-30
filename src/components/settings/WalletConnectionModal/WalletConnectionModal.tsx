@@ -1,4 +1,3 @@
-import styles from "./WalletConnectionModal.module.scss"
 
 const WalletConnectionModal = () => {
   return (
