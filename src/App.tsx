@@ -32,7 +32,7 @@ const App = () => {
 
 
   WebApp.SettingsButton.onClick(() => {
-    WebApp.showPopup({title: "Settings", message: "You clicked settings button", buttons: [{type: "ok"}]})
+    openModal(MODALS.SETTINGS)
   })
 
   return (
