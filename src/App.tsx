@@ -32,6 +32,7 @@ const App = () => {
 
 
   WebApp.SettingsButton.onClick(() => {
+    WebApp.SettingsButton.hide()
     openModal(MODALS.SETTINGS)
   })
 
