@@ -1,11 +1,15 @@
-import { TonConnectButton } from "@tonconnect/ui-react";
+import { TonConnectButton, WalletAlreadyConnectedError } from "@tonconnect/ui-react";
 import { fromNano } from 'ton-core';
 import { useMainContract } from './hooks/useMainContract';
 import { useTonConnect } from './hooks/useTonConnect';
 import './App.css';
 import './style.css'
 import WebApp from "@twa-dev/sdk";
-import Header from "./components/Header";
+import { useModal } from "./hooks/useModal";
+import { MODALS } from "./constants/modals";
+import SettingsModal from "./components/settings/SettingsModal/SettingsModal";
+import LanguageSelectionModal from "./components/settings/LanguageSelectionModal/LanguageSelectionModal";
+import WalletConnectionModal from "./components/settings/WalletConnectionModal/WalletConnectionModal";
 
 
 const App = () => {
@@ -20,9 +24,7 @@ const App = () => {
   } = useMainContract();
 
   const { connected } = useTonConnect();
-  const showAlert = () => {
-    WebApp.showAlert("Hey !")
-  }
+  const { openModal } = useModal()
   
   if (!WebApp.SettingsButton.isVisible) {
     WebApp.SettingsButton.show()
@@ -35,8 +37,6 @@ const App = () => {
 
   return (
     <div className="container">
-      <Header />
-
       <div className="connect-button">
         <TonConnectButton />
       </div>
@@ -70,10 +70,9 @@ const App = () => {
           </div>
         </div>
 
-        <button onClick={() => showAlert()} className="btn btn-blue">
+        <button onClick={() => openModal(MODALS.SETTINGS)} className="btn btn-blue">
               Show Alert
         </button>
-
         <br />
 
         {connected && (
@@ -102,6 +101,9 @@ const App = () => {
           </div>
         )}
       </div>
+      <SettingsModal />
+      <LanguageSelectionModal />
+      <WalletConnectionModal />
     </div>
   );
 };
