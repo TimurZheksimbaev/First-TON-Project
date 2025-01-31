@@ -1,5 +1,4 @@
 import styles from "./SettingsModal.module.scss"
-import BottomModal from "../../BottomModal/BottomModal"
 import { MODALS } from "../../../constants/modals"
 import { useModal } from "../../../hooks/useModal"
 import russiaIcon from "../../../assets/icons/Russia.svg"

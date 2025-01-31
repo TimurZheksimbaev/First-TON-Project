@@ -1,6 +1,5 @@
 import { MODALS } from "../../../constants/modals"
 import { useModal } from "../../../hooks/useModal"
-import BottomModal from "../../BottomModal/BottomModal"
 import styles from "./LanguageSelectionModal.module.scss"
 import tick from "../../../assets/icons/tick.svg"
 import circle from "../../../assets/icons/circle.svg"
