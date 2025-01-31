@@ -4,76 +4,92 @@ import BottomModal from "../../BottomModal/BottomModal"
 import styles from "./LanguageSelectionModal.module.scss"
 import tick from "../../../assets/icons/tick.svg"
 import circle from "../../../assets/icons/circle.svg"
-import russiaIcon from "../../../assets/icons/Russia.svg"
-import usaIcon from "../../../assets/icons/usa.svg"
 import { useState } from "react"
-
-const LanguageSelectionModal = () => {
-    const {closeModal} = useModal()
-    const [selectedLanguage, setSelectedLanguage] = useState("")
-
-    const handleCloseModal = () => {
-        closeModal(MODALS.LANGUAGE_SELECTION)
-    }
-
-    const handleSelectLanguage = (language: string) => {
-        setSelectedLanguage(language)
-    }
-  return (
-    <BottomModal
-     modalId={MODALS.LANGUAGE_SELECTION} 
-     title="Язык/Language" 
-     titleWrapperStyles={styles.titleStyles} 
-     onClose={handleCloseModal}>
-
-        <div className={styles.wrapper}>
-
-            <div className={styles.languageSection}>
-
-                <div 
-                className={`${styles.languageWrapper} ${selectedLanguage === 'ru' ? styles.selected : ''}`} 
-                onClick={() => handleSelectLanguage('ru')}
-                >
-                    <div className={`${styles.languageAndIcon} ${selectedLanguage === 'ru' ? styles.selectedText : ''}`}>
-                        <div className={styles.countryIconWrapper}>
-                            <img className={styles.countryIcon} src={usaIcon} alt="usaIcon" />
-                        </div>
-                            English language
-                    </div>
-
-                    <img 
-                        src={selectedLanguage === 'ru' ? tick : circle} 
-                        alt={selectedLanguage === 'ru' ? "Selected" : "Not selected"} 
-                    />
-                </div>
+import usaIcon from "../../../assets/icons/USA.svg"
+import russiaIcon from "../../../assets/icons/Russia.svg"
 
 
-                <div
-                 className={`${styles.languageWrapper} ${selectedLanguage === 'en' ? styles.selected : ''}`} 
-                 onClick={() => handleSelectLanguage('en')}
-                 >
-                    <div className={`${styles.languageAndIcon} ${selectedLanguage === 'en' ? styles.selectedText : ''}`}>
-                        <div className={styles.countryIconWrapper}>
-                            <img className={styles.countryIcon} src={russiaIcon} alt="russiaIcon" />
-                        </div>
-                        Русский язык
-                    </div>
+const LANGUAGES = [
+  {
+    code: 'en',
+    name: 'English language',
+    icon: usaIcon,
+  },
+  {
+    code: 'ru',
+    name: 'Русский язык',
+    icon: russiaIcon,
+  },
+];
 
-                    <img 
-                        src={selectedLanguage === 'en' ? tick : circle} 
-                        alt={selectedLanguage === 'en' ? "Selected" : "Not selected"} 
-                    />
+type LanguageCode = typeof LANGUAGES[number]['code'];
 
-                </div>
-            </div>
-
-            <button className={styles.applyButton} onClick={handleCloseModal}>
-                Применить/Apply
-            </button>
-
-        </div>
-    </BottomModal>
-  )
+interface LanguageOptionProps {
+  language: typeof LANGUAGES[number];
+  isSelected: boolean;
+  onSelect: (code: LanguageCode) => void;
 }
 
-export default LanguageSelectionModal
+const LanguageOption = ({ language, isSelected, onSelect }: LanguageOptionProps) => (
+  <div 
+    className={`${styles.languageWrapper} ${isSelected ? styles.selected : ''}`} 
+    onClick={() => onSelect(language.code)}
+  >
+    <div className={`${styles.languageAndIcon} ${isSelected ? styles.selectedText : ''}`}>
+      <div className={styles.countryIconWrapper}>
+        <img className={styles.countryIcon} src={language.icon} alt={`${language.name} icon`} />
+      </div>
+      {language.name}
+    </div>
+    <img 
+      src={isSelected ? tick : circle} 
+      alt={isSelected ? "Selected" : "Not selected"} 
+    />
+  </div>
+);
+
+const LanguageSelectionModal = () => {
+  const { closeModal } = useModal();
+  const [selectedLanguage, setSelectedLanguage] = useState<LanguageCode | null>(null);
+
+  const handleCloseModal = () => {
+    // TODO: implement language change logic
+
+    closeModal(MODALS.LANGUAGE_SELECTION);
+  };
+
+  const handleSelectLanguage = (code: LanguageCode) => {
+    setSelectedLanguage(code);
+  };
+
+  return (
+    <BottomModal
+      modalId={MODALS.LANGUAGE_SELECTION} 
+      title="Language / Язык" 
+      titleWrapperStyles={styles.titleStyles} 
+      onClose={handleCloseModal}
+    >
+      <div className={styles.wrapper}>
+        <div className={styles.languageSection}>
+          {LANGUAGES.map((language) => (
+            <LanguageOption
+              key={language.code}
+              language={language}
+              isSelected={selectedLanguage === language.code}
+              onSelect={handleSelectLanguage}
+            />
+          ))}
+        </div>
+
+        <button 
+          className={styles.applyButton} 
+          onClick={handleCloseModal}
+        >
+          Apply / Применить
+        </button>
+      </div>
+    </BottomModal>
+  );
+};
+
+export default LanguageSelectionModal;
