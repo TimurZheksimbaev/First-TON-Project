@@ -1,4 +1,4 @@
-import { TonConnectButton } from "@tonconnect/ui-react";
+import { TonConnectButton, useTonWallet } from "@tonconnect/ui-react";
 import { fromNano } from 'ton-core';
 import { useMainContract } from './hooks/useMainContract';
 import { useTonConnect } from './hooks/useTonConnect';
@@ -88,6 +88,7 @@ const App = () => {
 
             <button onClick={() => sendWithdraw()} className="btn btn-purple">
               Request 0.7 TON withdraw
+
             </button>
 
             <button onClick={() => sendTx()} className="btn btn-orange">

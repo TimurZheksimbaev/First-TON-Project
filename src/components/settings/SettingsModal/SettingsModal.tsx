@@ -5,6 +5,7 @@ import { useModal } from "../../../hooks/useModal"
 import russiaIcon from "../../../assets/icons/Russia.svg"
 import cryptoWalletIcon from "../../../assets/images/Wallet.png"
 import ArrowRight from "../../../assets/icons/arrow-right.svg"
+import CentralModal from "../../CentralModal/CentralModal"
 
 
 const SettingsModal = () => {
@@ -25,11 +26,11 @@ const SettingsModal = () => {
     }
 
     return (
-        <BottomModal
+        <CentralModal
             modalId={MODALS.SETTINGS} 
             title="Настройки" 
             onClose={handleCloseModal} 
-            titleWrapperStyles={styles.titleStyles}
+            headerStyles={styles.titleStyles}
             >
             <div className={styles.wrapper}>
                 <div className={styles.childModalWrapper} onClick={handleOpenLanguageSelectionModal}>
@@ -53,7 +54,7 @@ const SettingsModal = () => {
                     Ок
                 </button>
             </div>
-        </BottomModal>
+        </CentralModal>
     )
 }
 
