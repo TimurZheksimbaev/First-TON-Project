@@ -5,8 +5,8 @@ import styles from "./LanguageSelectionModal.module.scss"
 import tick from "../../../assets/icons/tick.svg"
 import circle from "../../../assets/icons/circle.svg"
 import { useState } from "react"
-import usaIcon from "../../../assets/icons/USA.svg"
-import russiaIcon from "../../../assets/icons/Russia.svg"
+import usaIcon from "../../../assets/icons/usa.svg"
+import russiaIcon from "../../../assets/icons/russia.svg"
 
 
 const LANGUAGES = [
