@@ -67,8 +67,8 @@ $background-icon: #373A43;
         background: #282830;
     }
 
-    &.selected {
-        border-color: $border-selected;
+    &.active {
+        border-color: #2F80ED;
         .text {
             color: #2F80ED;
         }

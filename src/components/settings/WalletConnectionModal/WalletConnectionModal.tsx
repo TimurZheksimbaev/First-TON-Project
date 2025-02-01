@@ -8,28 +8,44 @@ import copyIcon from "../../../assets/icons/copy.svg"
 import tickIcon from "../../../assets/icons/tick.svg"
 
 import { useTonConnectModal, useTonAddress, useTonWallet, useTonConnectUI } from "@tonconnect/ui-react"
+import { useState } from "react"
 
+import { useTonConnectCommands } from "../../../hooks/useTonConnectCommands"
+import { useCallback } from "react"
 
 const WalletConnectionModal = () => {
   const {closeModal} = useModal()
 
-  const [connector] = useTonConnectUI()
-  const { open } = useTonConnectModal();
-  const wallet = useTonWallet();
-  const userAddress = useTonAddress();
+  const {
+    wallet,
+    userAddress,
+    connectWallet,
+    disconnectWallet,
+  } = useTonConnectCommands()
+
+  const [activeButton, setActiveButton] = useState("")
 
   const handleDisconnectWallet = () => {
-    connector.disconnect()
+    if (userAddress) {
+      disconnectWallet()
+    }
   }
 
   const handleCloseModal = () => {  
     closeModal(MODALS.WALLET_CONNECTION)
   }
 
+  const handleWalletConnect = () => {
+    setActiveButton("connect")
+    connectWallet()
+  }
+
   const handleCopyAddress = async () => {
+    setActiveButton("address")
     if (userAddress) {
       await navigator.clipboard.writeText(userAddress);
     }
+    setTimeout(() => setActiveButton(""), 250)
   };
 
   return (
@@ -44,22 +60,21 @@ const WalletConnectionModal = () => {
       <div className={styles.wrapper}>
         <div className={styles.walletSection}>
           <div 
-          className={styles.walletWrapper} 
-          onClick={open}
+          className={`${styles.walletWrapper} ${activeButton === 'connect' ? styles.active: ''}`} 
+          onClick={handleWalletConnect}
           >
             <p className={styles.text}>
-              {wallet?.device.appName || 'Default ton wallet'}
+              {wallet?.device.appName || 'Подключить кошелек'}
             </p>
             <img src={tickIcon} alt="tickIcon" className={styles.icon} />
           </div>
 
           <div 
-          className={styles.walletWrapper}
+          className={`${styles.walletWrapper} ${activeButton === 'address' ? styles.active: ''}`} 
           onClick={handleCopyAddress}
           >
             <p className={styles.text}>
-              {userAddress || '0x11111111111'}
-              
+              {userAddress || "Ваш адрес"}
             </p>
             <img src={copyIcon} alt="copyIcon" className={styles.icon} />
           </div>
@@ -81,3 +96,4 @@ const WalletConnectionModal = () => {
 }
 
 export default WalletConnectionModal
+

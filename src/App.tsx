@@ -10,6 +10,8 @@ import { MODALS } from "./constants/modals";
 import SettingsModal from "./components/settings/SettingsModal/SettingsModal";
 import LanguageSelectionModal from "./components/settings/LanguageSelectionModal/LanguageSelectionModal";
 import WalletConnectionModal from "./components/settings/WalletConnectionModal/WalletConnectionModal";
+import { useTonConnectCommands } from "./hooks/useTonConnectCommands";
+
 
 
 const App = () => {
@@ -22,6 +24,8 @@ const App = () => {
     sendWithdraw,
     sendTx
   } = useMainContract();
+
+  const {sendTransaction, sendUsdtTransaction} = useTonConnectCommands()
 
   const { connected } = useTonConnect();
   const { openModal } = useModal()
@@ -91,8 +95,12 @@ const App = () => {
 
             </button>
 
-            <button onClick={() => sendTx()} className="btn btn-orange">
-              Send 0.1 TON to another address
+            <button onClick={() => sendUsdtTransaction(1.99)} className="btn btn-orange">
+              Send 5 USDT to another address
+            </button>
+
+            <button onClick={() => sendTransaction("kQDs2zrz8Int5ppwoPVjPr36oNxBA9C42Fyz67Kg1y4qscRh", 1.99)} className="btn btn-orange">
+              Get address
             </button>
           </div>
         )}
