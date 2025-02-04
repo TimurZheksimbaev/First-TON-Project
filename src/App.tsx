@@ -43,17 +43,17 @@ const App = () => {
       settings.hide()
       openModal(MODALS.SETTINGS)
     })
-  }, [settings])
+  }, [])
 
   useEffect(() => {
       miniApp.setBgColor('#161C24');
       miniApp.setHeaderColor('#161C24');
       miniApp.ready();
-  }, [miniApp]);
+  }, []);
 
   useEffect(() => {
       viewport && viewport.expand();
-  }, [viewport]);
+  }, []);
   
   // if (!WebApp.SettingsButton.isVisible) {
   //   WebApp.SettingsButton.show()
