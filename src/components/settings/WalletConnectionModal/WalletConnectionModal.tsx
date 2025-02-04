@@ -6,12 +6,9 @@ import { useModal } from "../../../hooks/useModal"
 
 import copyIcon from "../../../assets/icons/copy.svg" 
 import tickIcon from "../../../assets/icons/tick.svg"
-
-import { useTonConnectModal, useTonAddress, useTonWallet, useTonConnectUI } from "@tonconnect/ui-react"
 import { useState } from "react"
 
 import { useTonConnectCommands } from "../../../hooks/useTonConnectCommands"
-import { useCallback } from "react"
 
 const WalletConnectionModal = () => {
   const {closeModal} = useModal()
