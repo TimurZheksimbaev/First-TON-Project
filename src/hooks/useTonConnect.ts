@@ -1,5 +1,9 @@
 import { CHAIN, TonConnectUI, useTonConnectUI, useTonWallet } from '@tonconnect/ui-react';
 import { Address, Sender, SenderArguments } from '@ton/core';
+import { TonClient } from '@ton/ton';
+// import { useTonClient } from './useTonClient';
+import { useContext } from 'react';
+import { TonClientContext } from '../context/ton-client-context';
 
 
 export const useTonConnect = (): {
@@ -8,9 +12,11 @@ export const useTonConnect = (): {
   walletAddress: Address | null;
   network: CHAIN | null;
   tonConnectUI: TonConnectUI;
+  tonClient: TonClient | undefined;
 } => {
   const [tonConnectUI] = useTonConnectUI();
   const wallet = useTonWallet();
+  const { tonClient } = useContext(TonClientContext)
 
   const walletAddress = wallet?.account?.address ? Address.parse(wallet.account.address) : undefined;
   return {
@@ -34,5 +40,6 @@ export const useTonConnect = (): {
     walletAddress: walletAddress ?? null,
     network: wallet?.account?.chain ?? null,
     tonConnectUI,
+    tonClient
   };
 };
