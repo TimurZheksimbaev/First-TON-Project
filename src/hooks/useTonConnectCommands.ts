@@ -3,39 +3,36 @@ import {
   useTonAddress,
   useTonWallet,
   useTonConnectUI,
+  CHAIN,
 } from "@tonconnect/ui-react";
 import { useCallback } from "react";
-import { Address, toNano } from "ton-core";
+import { toNano } from "@ton/core";
 
 import { JettonMaster } from "@ton/ton";
 import { JettonWallet } from "../contracts/JettonWallet";
 
 import { useTonConnect } from "./useTonConnect";
 import { useGenerateId } from "./useGenerateId";
-import TonWeb from "tonweb";
-
-
-
-
-const TESTNET_USDT_MASTER_ADDRESS = Address.parse("kQD0GKBM8ZbryVk2aESmzfU6b9b_8era_IkvBSELujFZPsyy")
-const INVOICE_ADDRESS = Address.parse("0QDs2zrz8Int5ppwoPVjPr36oNxBA9C42Fyz67Kg1y4qsZmk")
+import { TESTNET_USDT_MASTER_ADDRESS, TESTNET_RECEIVER_ADDRESS, MAINNET_RECEIVER_ADDRESS, MAINNET_USDT_MASTER_ADDRESS } from "../constants/addresses";
+import { useTonClient } from "./useTonClient";
 
 
 export const calculateUsdtAmount = (usdCents: number) => BigInt(usdCents * 10000);
 
-
+    
 export const useTonConnectCommands = () => {
-  const tonWeb = new TonWeb()
-
-  tonWeb.provider.sendBoc()
 
   const [connector] = useTonConnectUI();
   const { open } = useTonConnectModal();
   const wallet = useTonWallet();
   const userAddress = useTonAddress();
 
-  const { sender, walletAddress, tonClient } = useTonConnect();
+  const { sender, walletAddress} = useTonConnect();
+  const tonClient = useTonClient()
   const orderId = useGenerateId();
+
+  const jettonMasterAddress = wallet?.account.chain === CHAIN.TESTNET ? TESTNET_USDT_MASTER_ADDRESS: MAINNET_USDT_MASTER_ADDRESS
+  const receiverAddress = wallet?.account.chain === CHAIN.TESTNET ? TESTNET_RECEIVER_ADDRESS: MAINNET_RECEIVER_ADDRESS
 
   const connectWallet = useCallback(() => {
     if (!userAddress) {
@@ -80,25 +77,18 @@ export const useTonConnectCommands = () => {
     try {
       if (!tonClient || !walletAddress) return;
 
-      const jettonMaster = tonClient.open(JettonMaster.create(TESTNET_USDT_MASTER_ADDRESS));
+      const jettonMaster = tonClient.open(JettonMaster.create(jettonMasterAddress));
       const usersUsdtAddress = await jettonMaster.getWalletAddress(walletAddress);
-      console.log(usersUsdtAddress.toString())
 
-
-      // creating and opening jetton wallet instance.
-      // First argument (provider) will be automatically substituted in methods, which names starts with 'get' or 'send'
       const jettonWallet = tonClient.open(JettonWallet.createFromAddress(usersUsdtAddress));
-
 
       await jettonWallet.sendTransfer(sender, {
         fwdAmount: 1n,
         comment: orderId,
         jettonAmount: calculateUsdtAmount(amount * 100),
-        toAddress: INVOICE_ADDRESS,
-        value: toNano("0.001"),
+        toAddress: receiverAddress,
+        value: toNano('0.038'),
       });
-
-      console.log(`See transaction at https://testnet.tonviewer.com/${usersUsdtAddress.toString()}`);
     } catch (error) {
       console.log('Error during transaction check:', error);
     }

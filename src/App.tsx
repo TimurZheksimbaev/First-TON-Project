@@ -4,13 +4,15 @@ import { useMainContract } from './hooks/useMainContract';
 import { useTonConnect } from './hooks/useTonConnect';
 import './App.css';
 import './style.css'
-import WebApp from "@twa-dev/sdk";
+// import WebApp from "@twa-dev/sdk";
 import { useModal } from "./hooks/useModal";
 import { MODALS } from "./constants/modals";
 import SettingsModal from "./components/settings/SettingsModal/SettingsModal";
 import LanguageSelectionModal from "./components/settings/LanguageSelectionModal/LanguageSelectionModal";
 import WalletConnectionModal from "./components/settings/WalletConnectionModal/WalletConnectionModal";
 import { useTonConnectCommands } from "./hooks/useTonConnectCommands";
+import { useMiniApp, useViewport, useSettingsButton } from "@telegram-apps/sdk-react";
+import { useEffect } from "react";
 
 
 
@@ -21,24 +23,44 @@ const App = () => {
     counter_value,
     sendIncrement,
     sendDeposit,
-    sendWithdraw,
-    sendTx
+    sendWithdraw
   } = useMainContract();
 
-  const {sendTransaction, sendUsdtTransaction} = useTonConnectCommands()
+  const {sendUsdtTransaction} = useTonConnectCommands()
 
   const { connected } = useTonConnect();
   const { openModal } = useModal()
+
+  const miniApp = useMiniApp();
+  const viewport = useViewport();
+  const settings = useSettingsButton()
+
+  useEffect(() => {
+    settings.on('click', () => {
+      settings.hide()
+      openModal(MODALS.SETTINGS)
+    })
+  }, [settings])
+
+  useEffect(() => {
+      miniApp.setBgColor('#161C24');
+      miniApp.setHeaderColor('#161C24');
+      miniApp.ready();
+  }, [miniApp]);
+
+  useEffect(() => {
+      viewport && viewport.expand();
+  }, [viewport]);
   
-  if (!WebApp.SettingsButton.isVisible) {
-    WebApp.SettingsButton.show()
-  }
+  // if (!WebApp.SettingsButton.isVisible) {
+  //   WebApp.SettingsButton.show()
+  // }
 
 
-  WebApp.SettingsButton.onClick(() => {
-    WebApp.SettingsButton.hide()
-    openModal(MODALS.SETTINGS)
-  })
+  // WebApp.SettingsButton.onClick(() => {
+  //   WebApp.SettingsButton.hide()
+  //   openModal(MODALS.SETTINGS)
+  // })
 
   return (
     <div className="container">
@@ -54,7 +76,7 @@ const App = () => {
           
           <div className="card-content">
             <div className="detail-item">
-              <b>{WebApp.platform}</b>
+              {/* <b>{WebApp.platform}</b> */}
               <h3>Contract Address</h3>
               <p className="mono">{contract_address?.slice(0, 30) + "..."}</p>
             </div>
@@ -97,10 +119,6 @@ const App = () => {
 
             <button onClick={() => sendUsdtTransaction(1.99)} className="btn btn-orange">
               Send 5 USDT to another address
-            </button>
-
-            <button onClick={() => sendTransaction("kQDs2zrz8Int5ppwoPVjPr36oNxBA9C42Fyz67Kg1y4qscRh", 1.99)} className="btn btn-orange">
-              Get address
             </button>
           </div>
         )}
