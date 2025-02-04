@@ -4,15 +4,15 @@ import { useMainContract } from './hooks/useMainContract';
 import { useTonConnect } from './hooks/useTonConnect';
 import './App.css';
 import './style.css'
-// import WebApp from "@twa-dev/sdk";
+import WebApp from "@twa-dev/sdk";
 import { useModal } from "./hooks/useModal";
 import { MODALS } from "./constants/modals";
 import SettingsModal from "./components/settings/SettingsModal/SettingsModal";
 import LanguageSelectionModal from "./components/settings/LanguageSelectionModal/LanguageSelectionModal";
 import WalletConnectionModal from "./components/settings/WalletConnectionModal/WalletConnectionModal";
 import { useTonConnectCommands } from "./hooks/useTonConnectCommands";
-import { useMiniApp, useViewport, useSettingsButton } from "@telegram-apps/sdk-react";
-import { useEffect } from "react";
+// import { useMiniApp, useViewport, useSettingsButton } from "@telegram-apps/sdk-react";
+// import { useEffect } from "react";
 
 
 
@@ -31,39 +31,39 @@ const App = () => {
   const { connected } = useTonConnect();
   const { openModal } = useModal()
 
-  const miniApp = useMiniApp();
-  const viewport = useViewport();
-  const settings = useSettingsButton()
+  // const miniApp = useMiniApp();
+  // const viewport = useViewport();
+  // const settings = useSettingsButton()
 
-  useEffect(() => {
-    if (!settings.isVisible) {
-      settings.show()
-    }
-    settings.on('click', () => {
-      settings.hide()
-      openModal(MODALS.SETTINGS)
-    })
-  }, [])
+  // useEffect(() => {
+  //   if (!settings.isVisible) {
+  //     settings.show()
+  //   }
+  //   settings.on('click', () => {
+  //     settings.hide()
+  //     openModal(MODALS.SETTINGS)
+  //   })
+  // }, [])
 
-  useEffect(() => {
-      miniApp.setBgColor('#161C24');
-      miniApp.setHeaderColor('#161C24');
-      miniApp.ready();
-  }, []);
+  // useEffect(() => {
+  //     miniApp.setBgColor('#161C24');
+  //     miniApp.setHeaderColor('#161C24');
+  //     miniApp.ready();
+  // }, []);
 
-  useEffect(() => {
-      viewport && viewport.expand();
-  }, []);
+  // useEffect(() => {
+  //     viewport && viewport.expand();
+  // }, []);
   
-  // if (!WebApp.SettingsButton.isVisible) {
-  //   WebApp.SettingsButton.show()
-  // }
+  if (!WebApp.SettingsButton.isVisible) {
+    WebApp.SettingsButton.show()
+  }
 
 
-  // WebApp.SettingsButton.onClick(() => {
-  //   WebApp.SettingsButton.hide()
-  //   openModal(MODALS.SETTINGS)
-  // })
+  WebApp.SettingsButton.onClick(() => {
+    WebApp.SettingsButton.hide()
+    openModal(MODALS.SETTINGS)
+  })
 
   return (
     <div className="container">
