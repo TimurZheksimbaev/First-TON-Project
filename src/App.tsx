@@ -4,16 +4,16 @@ import { useMainContract } from './hooks/useMainContract';
 import { useTonConnect } from './hooks/useTonConnect';
 import './App.css';
 import './style.css'
-import WebApp from "@twa-dev/sdk";
+// import WebApp from "@twa-dev/sdk";
 import { useModal } from "./hooks/useModal";
 import { MODALS } from "./constants/modals";
 import SettingsModal from "./components/settings/SettingsModal/SettingsModal";
 import LanguageSelectionModal from "./components/settings/LanguageSelectionModal/LanguageSelectionModal";
 import WalletConnectionModal from "./components/settings/WalletConnectionModal/WalletConnectionModal";
 import { useTonConnectCommands } from "./hooks/useTonConnectCommands";
-// import {useEffect} from "react";
-// import { useMiniApp, useViewport, useSettingsButton } from "@telegram-apps/sdk-react";
-// import { useEffect } from "react";
+import {useEffect} from "react";
+import { useMiniApp, useViewport, useSettingsButton } from "@telegram-apps/sdk-react";
+
 
 
 
@@ -33,47 +33,71 @@ const App = () => {
   const { openModal, getModalState } = useModal()
   const {isOpen} = getModalState(MODALS.SETTINGS)
 
-  // useEffect(() => {
-  //   WebApp.SettingsButton.show()
-  // }, [isOpen])
 
+  const miniApp = useMiniApp();
+  const viewport = useViewport();
+  const settings = useSettingsButton()
 
-  // const miniApp = useMiniApp();
-  // const viewport = useViewport();
-  // const settings = useSettingsButton()
-
-  // useEffect(() => {
-  //   if (!settings.isVisible) {
-  //     settings.show()
-  //   }
-  //   settings.on('click', () => {
-  //     settings.hide()
-  //     openModal(MODALS.SETTINGS)
-  //   })
-  // }, [])
-
-  // useEffect(() => {
-  //     miniApp.setBgColor('#161C24');
-  //     miniApp.setHeaderColor('#161C24');
-  //     miniApp.ready();
-  // }, []);
-
-  // useEffect(() => {
-  //     viewport && viewport.expand();
-  // }, []);
-  
-  if (!WebApp.SettingsButton.isVisible) {
-    WebApp.SettingsButton.show()
-  }
-
-
-  WebApp.SettingsButton.onClick(() => {
-    WebApp.SettingsButton.hide()
-    openModal(MODALS.SETTINGS)
-    if (!isOpen) {
-      WebApp.SettingsButton.show()
+  useEffect(() => {
+    // Initial setup for settings button
+    if (!settings.isVisible) {
+      settings.show();
     }
-  })
+
+    // Click handler function
+    const handleSettingsClick = () => {
+      settings.hide();
+      openModal(MODALS.SETTINGS);
+    };
+
+    // Add click listener
+    settings.on('click', handleSettingsClick);
+
+    // Cleanup listener when component unmounts
+    return () => {
+      settings.off('click', handleSettingsClick);
+    };
+  }, []); // Empty dependency array since we only want this setup once
+
+  // Add another useEffect to handle modal state changes
+  useEffect(() => {
+    if (isOpen) {
+      settings.hide();
+    } else {
+      settings.show();
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
+      miniApp.setBgColor('#161C24');
+      miniApp.setHeaderColor('#161C24');
+      miniApp.ready();
+  }, []);
+
+  useEffect(() => {
+      viewport && viewport.expand();
+  }, []);
+
+  // useEffect(() => {
+  //   if (!WebApp.SettingsButton.isVisible) {
+  //     WebApp.SettingsButton.show();
+  //   }
+  //
+  //   const handleSettingsClick = () => {
+  //     WebApp.SettingsButton.hide();
+  //     openModal(MODALS.SETTINGS);
+  //     if (!isOpen) {
+  //       WebApp.SettingsButton.show();
+  //     }
+  //   };
+  //
+  //   WebApp.SettingsButton.onClick(handleSettingsClick);
+  //
+  //   return () => {
+  //     WebApp.SettingsButton.offClick(handleSettingsClick);
+  //   };
+  // }, [isOpen, openModal]);
+
 
   return (
     <div className="container">
