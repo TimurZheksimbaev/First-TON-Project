@@ -61,7 +61,9 @@ const App = () => {
 
 
   WebApp.SettingsButton.onClick(() => {
+    WebApp.SettingsButton.hide()
     openModal(MODALS.SETTINGS)
+    WebApp.SettingsButton.show()
   })
 
   return (
