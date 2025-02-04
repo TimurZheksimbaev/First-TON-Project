@@ -68,8 +68,8 @@ const LanguageSelectionModal = () => {
     return (
         <CentralModal
             modalId={MODALS.LANGUAGE_SELECTION}
-            title="Language / Язык"
-            headerStyles={styles.titleStyles}
+            title="Язык / Language"
+            headerStyles={styles.titleStyles} 
             onClose={handleCloseModal}
         >
             <div className={styles.wrapper}>
