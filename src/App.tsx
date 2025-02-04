@@ -36,6 +36,9 @@ const App = () => {
   const settings = useSettingsButton()
 
   useEffect(() => {
+    if (!settings.isVisible) {
+      settings.show()
+    }
     settings.on('click', () => {
       settings.hide()
       openModal(MODALS.SETTINGS)
