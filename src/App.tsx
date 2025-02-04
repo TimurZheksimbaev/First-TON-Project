@@ -31,9 +31,8 @@ const App = () => {
 
   const { connected } = useTonConnect();
   const { openModal, getModalState } = useModal()
+  const {isOpen} = getModalState(MODALS.SETTINGS)
 
-  // const {isOpen} = getModalState(MODALS.SETTINGS)
-  //
   // useEffect(() => {
   //   WebApp.SettingsButton.show()
   // }, [isOpen])
@@ -71,7 +70,6 @@ const App = () => {
   WebApp.SettingsButton.onClick(() => {
     WebApp.SettingsButton.hide()
     openModal(MODALS.SETTINGS)
-    const {isOpen} = getModalState(MODALS.SETTINGS)
     if (!isOpen) {
       WebApp.SettingsButton.show()
     }
