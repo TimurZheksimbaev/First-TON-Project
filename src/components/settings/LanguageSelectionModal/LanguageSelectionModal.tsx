@@ -41,10 +41,13 @@ const LanguageOption = ({ language, isSelected, onSelect }: LanguageOptionProps)
             </div>
             {language.name}
         </div>
-        <img
-            src={isSelected ? tick : circle}
-            alt={isSelected ? "Selected" : "Not selected"}
-        />
+        <div className={styles.selectionIconWrapper}>
+            <img
+                src={isSelected ? tick : circle}
+                alt={isSelected ? "Selected" : "Not selected"}
+                className={styles.selectionIcon}
+                />
+        </div>
     </div>
 );
 

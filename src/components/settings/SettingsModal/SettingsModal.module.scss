@@ -19,7 +19,6 @@
 }
 
 .OK {
-
     display: flex;
     margin-top: 20px;
     padding: 10px;
@@ -64,9 +63,8 @@
 .icon {
     width: 14px;
     height: 14px;
-    flex-shrink: 0;
 }
 
 .arrow {
-    padding-right: 10px;
+    padding: 5px;
 }

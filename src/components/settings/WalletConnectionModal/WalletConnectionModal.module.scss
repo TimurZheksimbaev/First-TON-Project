@@ -36,7 +36,7 @@ $background-icon: #373A43;
     padding: 6px;
     justify-content: space-between;
     align-items: center;
-    align-self: stretch;
+
     gap: 10px;
     border-radius: 8px;
     border: 1px solid $border-default;
@@ -44,10 +44,6 @@ $background-icon: #373A43;
     transition: all 0.2s ease;
 
     .text {
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 1;
-        align-self: stretch;
         overflow: hidden;
         color: #FFF;
         font-family: var.$font-default;
