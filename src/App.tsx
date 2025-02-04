@@ -11,6 +11,7 @@ import SettingsModal from "./components/settings/SettingsModal/SettingsModal";
 import LanguageSelectionModal from "./components/settings/LanguageSelectionModal/LanguageSelectionModal";
 import WalletConnectionModal from "./components/settings/WalletConnectionModal/WalletConnectionModal";
 import { useTonConnectCommands } from "./hooks/useTonConnectCommands";
+import {useEffect} from "react";
 // import { useMiniApp, useViewport, useSettingsButton } from "@telegram-apps/sdk-react";
 // import { useEffect } from "react";
 
@@ -29,7 +30,14 @@ const App = () => {
   const {sendUsdtTransaction} = useTonConnectCommands()
 
   const { connected } = useTonConnect();
-  const { openModal } = useModal()
+  const { openModal, getModalState } = useModal()
+
+  // const {isOpen} = getModalState(MODALS.SETTINGS)
+  //
+  // useEffect(() => {
+  //   WebApp.SettingsButton.show()
+  // }, [isOpen])
+
 
   // const miniApp = useMiniApp();
   // const viewport = useViewport();
@@ -63,7 +71,10 @@ const App = () => {
   WebApp.SettingsButton.onClick(() => {
     WebApp.SettingsButton.hide()
     openModal(MODALS.SETTINGS)
-    WebApp.SettingsButton.show()
+    const {isOpen} = getModalState(MODALS.SETTINGS)
+    if (!isOpen) {
+      WebApp.SettingsButton.show()
+    }
   })
 
   return (
