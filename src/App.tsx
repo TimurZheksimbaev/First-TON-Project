@@ -11,7 +11,7 @@ import SettingsModal from "./components/settings/SettingsModal/SettingsModal";
 import LanguageSelectionModal from "./components/settings/LanguageSelectionModal/LanguageSelectionModal";
 import WalletConnectionModal from "./components/settings/WalletConnectionModal/WalletConnectionModal";
 import { useTonConnectCommands } from "./hooks/useTonConnectCommands";
-import {useEffect} from "react";
+// import {useEffect} from "react";
 // import { useMiniApp, useViewport, useSettingsButton } from "@telegram-apps/sdk-react";
 // import { useEffect } from "react";
 
