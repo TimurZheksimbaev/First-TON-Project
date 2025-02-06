@@ -1,6 +1,7 @@
-// hooks/useWebApp.ts
 import { useEffect, useCallback } from 'react';
 import WebApp from "@twa-dev/sdk";
+import { useModal } from './useModal';
+import { MODALS } from '../constants/modals';
 
 interface UseWebAppProps {
   onSettingsClick?: () => void;
@@ -11,6 +12,9 @@ export const useWebApp = ({
   onSettingsClick,
   initiallyShowSettings = true
 }: UseWebAppProps = {}) => {
+  const { getModalState } = useModal();
+  const { isOpen } = getModalState(MODALS.SETTINGS);
+
   const showSettingsButton = useCallback(() => {
     if (!WebApp.SettingsButton.isVisible) {
       WebApp.SettingsButton.show();
@@ -53,6 +57,14 @@ export const useWebApp = ({
       WebApp.SettingsButton.offClick(handleSettingsClick);
     };
   }, [onSettingsClick, hideSettingsButton]);
+
+  useEffect(() => {
+    if (isOpen) {
+      hideSettingsButton();
+    } else {
+      showSettingsButton();
+    }
+  }, [isOpen, hideSettingsButton, showSettingsButton]);
 
   return {
     showSettingsButton,
