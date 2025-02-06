@@ -14,7 +14,7 @@ import { JettonWallet } from "../contracts/JettonWallet";
 import { useTonConnect } from "./useTonConnect";
 import { useGenerateId } from "./useGenerateId";
 import { TESTNET_USDT_MASTER_ADDRESS, TESTNET_RECEIVER_ADDRESS, MAINNET_RECEIVER_ADDRESS, MAINNET_USDT_MASTER_ADDRESS } from "../constants/addresses";
-import { useTonClient } from "./useTonClient";
+// import { useTonClient } from "./useTonClient";
 
 
 export const calculateUsdtAmount = (usdCents: number) => BigInt(usdCents * 10000);
@@ -27,8 +27,8 @@ export const useTonConnectCommands = () => {
   const wallet = useTonWallet();
   const userAddress = useTonAddress();
 
-  const { sender, walletAddress} = useTonConnect();
-  const tonClient = useTonClient()
+  const { sender, walletAddress, tonClient} = useTonConnect();
+
   const orderId = useGenerateId();
 
   const jettonMasterAddress = wallet?.account.chain === CHAIN.TESTNET ? TESTNET_USDT_MASTER_ADDRESS: MAINNET_USDT_MASTER_ADDRESS

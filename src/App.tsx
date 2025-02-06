@@ -33,7 +33,6 @@ const App = () => {
   const { connected } = useTonConnect();
 
   useWebApp({
-    initiallyShowSettings: true,
     onSettingsClick: () => openModal(MODALS.SETTINGS)
   })
 

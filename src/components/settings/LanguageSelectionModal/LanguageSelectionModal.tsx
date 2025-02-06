@@ -1,12 +1,13 @@
 import { MODALS } from "../../../constants/modals"
 import { useModal } from "../../../hooks/useModal"
 import styles from "./LanguageSelectionModal.module.scss"
+import { useState } from "react"
+import CentralModal from "../../CentralModal/CentralModal"
+
 import tick from "../../../assets/icons/tick.svg"
 import circle from "../../../assets/icons/circle.svg"
-import { useState } from "react"
-import russiaIcon from "../../../assets/icons/Russia.svg"
+import russiaIcon from "../../../assets/icons/russia.svg"
 import usaIcon from "../../../assets/icons/usa.svg"
-import CentralModal from "../../CentralModal/CentralModal"
 
 
 const LANGUAGES = [

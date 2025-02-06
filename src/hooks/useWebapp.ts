@@ -1,74 +1,34 @@
-import { useEffect, useCallback } from 'react';
+import { useEffect } from 'react';
 import WebApp from "@twa-dev/sdk";
 import { useModal } from './useModal';
 import { MODALS } from '../constants/modals';
 
 interface UseWebAppProps {
-  onSettingsClick?: () => void;
-  initiallyShowSettings?: boolean;
+    onSettingsClick?: () => void;
 }
 
-export const useWebApp = ({
-  onSettingsClick,
-  initiallyShowSettings = true
-}: UseWebAppProps = {}) => {
+export const useWebApp = ({ onSettingsClick }: UseWebAppProps) => {
   const { getModalState } = useModal();
   const { isOpen } = getModalState(MODALS.SETTINGS);
 
-  const showSettingsButton = useCallback(() => {
-    if (!WebApp.SettingsButton.isVisible) {
-      WebApp.SettingsButton.show();
-    }
-  }, []);
-
-  const hideSettingsButton = useCallback(() => {
-    if (WebApp.SettingsButton.isVisible) {
-      WebApp.SettingsButton.hide();
-    }
-  }, []);
-
-  const initializeWebApp = useCallback(() => {
+  useEffect(() => {
     WebApp.ready();
-    
-    if (initiallyShowSettings) {
-      showSettingsButton();
-    }
-  }, [initiallyShowSettings, showSettingsButton]);
-
-  useEffect(() => {
-    initializeWebApp();
-
-    return () => {
-      hideSettingsButton();
-    };
-  }, [initializeWebApp, hideSettingsButton]);
-
-  useEffect(() => {
-    if (!onSettingsClick) return;
+    WebApp.SettingsButton.show();
 
     const handleSettingsClick = () => {
-      hideSettingsButton();
-      onSettingsClick();
+      WebApp.SettingsButton.hide();
+      onSettingsClick?.();
     };
 
     WebApp.SettingsButton.onClick(handleSettingsClick);
-
     return () => {
       WebApp.SettingsButton.offClick(handleSettingsClick);
     };
-  }, [onSettingsClick, hideSettingsButton]);
+  }, [onSettingsClick]);
 
   useEffect(() => {
-    if (isOpen) {
-      hideSettingsButton();
-    } else {
-      showSettingsButton();
-    }
-  }, [isOpen, hideSettingsButton, showSettingsButton]);
+    isOpen ? WebApp.SettingsButton.hide() : WebApp.SettingsButton.show();
+  }, [isOpen]);
 
-  return {
-    showSettingsButton,
-    hideSettingsButton,
-    initializeWebApp
-  };
+  return { platform: WebApp.platform };
 };
