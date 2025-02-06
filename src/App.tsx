@@ -32,9 +32,7 @@ const App = () => {
 
   const { connected } = useTonConnect();
 
-  useWebApp({
-    onSettingsClick: () => openModal(MODALS.SETTINGS)
-  })
+  useWebApp()
 
   const { openModal} = useModal()
   // const {isOpen} = getModalState(MODALS.SETTINGS)

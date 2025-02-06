@@ -3,12 +3,8 @@ import WebApp from "@twa-dev/sdk";
 import { useModal } from './useModal';
 import { MODALS } from '../constants/modals';
 
-interface UseWebAppProps {
-    onSettingsClick?: () => void;
-}
-
-export const useWebApp = ({ onSettingsClick }: UseWebAppProps) => {
-  const { getModalState } = useModal();
+export const useWebApp = () => {
+  const { getModalState, openModal } = useModal();
   const { isOpen } = getModalState(MODALS.SETTINGS);
 
   useEffect(() => {
@@ -17,14 +13,14 @@ export const useWebApp = ({ onSettingsClick }: UseWebAppProps) => {
 
     const handleSettingsClick = () => {
       WebApp.SettingsButton.hide();
-      onSettingsClick?.();
+      openModal(MODALS.SETTINGS);
     };
 
     WebApp.SettingsButton.onClick(handleSettingsClick);
     return () => {
       WebApp.SettingsButton.offClick(handleSettingsClick);
     };
-  }, [onSettingsClick]);
+  }, [openModal]);
 
   useEffect(() => {
     isOpen ? WebApp.SettingsButton.hide() : WebApp.SettingsButton.show();
