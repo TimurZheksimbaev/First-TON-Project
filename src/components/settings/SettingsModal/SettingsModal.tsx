@@ -1,7 +1,7 @@
 import styles from "./SettingsModal.module.scss"
 import { MODALS } from "../../../constants/modals"
 import { useModal } from "../../../hooks/useModal"
-import russiaIcon from "../../../assets/icons/russia.svg"
+import russiaIcon from "../../../assets/icons/Russia.svg"
 import cryptoWalletIcon from "../../../assets/images/Wallet.png"
 import ArrowRight from "../../../assets/icons/arrow-right.svg"
 import CentralModal from "../../CentralModal/CentralModal"

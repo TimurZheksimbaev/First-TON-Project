@@ -6,7 +6,7 @@ import CentralModal from "../../CentralModal/CentralModal"
 
 import tick from "../../../assets/icons/tick.svg"
 import circle from "../../../assets/icons/circle.svg"
-import russiaIcon from "../../../assets/icons/russia.svg"
+import russiaIcon from "../../../assets/icons/Russia.svg"
 import usaIcon from "../../../assets/icons/usa.svg"
 
 
