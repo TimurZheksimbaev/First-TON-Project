@@ -4,14 +4,15 @@ import { useMainContract } from './hooks/useMainContract';
 import { useTonConnect } from './hooks/useTonConnect';
 import './App.css';
 import './style.css'
-import WebApp from "@twa-dev/sdk";
+// import WebApp from "@twa-dev/sdk";
 import { useModal } from "./hooks/useModal";
 import { MODALS } from "./constants/modals";
 import SettingsModal from "./components/settings/SettingsModal/SettingsModal";
 import LanguageSelectionModal from "./components/settings/LanguageSelectionModal/LanguageSelectionModal";
 import WalletConnectionModal from "./components/settings/WalletConnectionModal/WalletConnectionModal";
 import { useTonConnectCommands } from "./hooks/useTonConnectCommands";
-import {useEffect} from "react";
+import { useWebApp } from "./hooks/useWebapp";
+// import {useEffect} from "react";
 // import { useMiniApp, useViewport, useSettingsButton } from "@telegram-apps/sdk-react";
 
 
@@ -30,8 +31,16 @@ const App = () => {
   const {sendUsdtTransaction} = useTonConnectCommands()
 
   const { connected } = useTonConnect();
-  const { openModal, getModalState } = useModal()
-  const {isOpen} = getModalState(MODALS.SETTINGS)
+
+  useWebApp({
+    initiallyShowSettings: true,
+    onSettingsClick: () => openModal(MODALS.SETTINGS)
+  })
+
+  const { openModal} = useModal()
+  // const {isOpen} = getModalState(MODALS.SETTINGS)
+
+
 
 
   // const miniApp = useMiniApp();
@@ -77,27 +86,27 @@ const App = () => {
   //     viewport && viewport.expand();
   // }, []);
 
-  useEffect(() => {
-    if (!WebApp.SettingsButton.isVisible) {
-      WebApp.SettingsButton.show();
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (!WebApp.SettingsButton.isVisible) {
+  //     WebApp.SettingsButton.show();
+  //   }
+  // }, [])
 
-  useEffect(() => {
-    const handleSettingsClick = () => {
-      WebApp.SettingsButton.hide();
-      openModal(MODALS.SETTINGS);
-      if (!isOpen) {
-        WebApp.SettingsButton.show();
-      }
-    };
+  // useEffect(() => {
+  //   const handleSettingsClick = () => {
+  //     WebApp.SettingsButton.hide();
+  //     openModal(MODALS.SETTINGS);
+  //     if (!isOpen) {
+  //       WebApp.SettingsButton.show();
+  //     }
+  //   };
   
-    WebApp.SettingsButton.onClick(handleSettingsClick);
+  //   WebApp.SettingsButton.onClick(handleSettingsClick);
   
-    return () => {
-      WebApp.SettingsButton.offClick(handleSettingsClick);
-    };
-  }, [isOpen, openModal]);
+  //   return () => {
+  //     WebApp.SettingsButton.offClick(handleSettingsClick);
+  //   };
+  // }, [isOpen, openModal]);
 
 
   return (
