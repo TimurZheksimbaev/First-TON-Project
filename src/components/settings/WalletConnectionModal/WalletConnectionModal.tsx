@@ -8,17 +8,17 @@ import copyIcon from "../../../assets/icons/copy.svg"
 import tickIcon from "../../../assets/icons/tick.svg"
 import { useState } from "react"
 
-import { useTonConnectCommands } from "../../../hooks/useTonConnectCommands"
+import { useTonConnect } from "../../../hooks/useTonConnect"
+
 
 const WalletConnectionModal = () => {
   const {closeModal} = useModal()
-
   const {
-    wallet,
+    walletType,
     userAddress,
     connectWallet,
     disconnectWallet,
-  } = useTonConnectCommands()
+  } = useTonConnect()
 
   const [activeButton, setActiveButton] = useState("")
 
@@ -61,7 +61,7 @@ const WalletConnectionModal = () => {
           onClick={handleWalletConnect}
           >
             <p className={styles.text}>
-              {wallet?.device.appName || 'Подключить кошелек'}
+              {walletType || 'Подключить кошелек'}
             </p>
             <img src={tickIcon} alt="tickIcon" className={styles.icon} />
           </div>

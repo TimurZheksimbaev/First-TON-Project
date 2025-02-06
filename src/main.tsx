@@ -11,7 +11,7 @@ import { ModalsProvider } from './providers/ModalsProvider.tsx'
 const manifestUrl = 'https://timurzheksimbaev.github.io/First-TON-Project/tonconnect-manifest.json'
 
 createRoot(document.getElementById('root')!).render(
-  <TonConnectUIProvider manifestUrl={manifestUrl}>
+  <TonConnectUIProvider manifestUrl={manifestUrl}> 
     <TonClientProvider>
       {/* <SDKProvider acceptCustomStyles debug> */}
         <ModalsProvider>
@@ -19,5 +19,5 @@ createRoot(document.getElementById('root')!).render(
         </ModalsProvider>
       {/* </SDKProvider> */}
     </TonClientProvider>
-  </TonConnectUIProvider>
+  </TonConnectUIProvider> 
 )

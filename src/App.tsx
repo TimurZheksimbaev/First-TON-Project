@@ -10,8 +10,10 @@ import { MODALS } from "./constants/modals";
 import SettingsModal from "./components/settings/SettingsModal/SettingsModal";
 import LanguageSelectionModal from "./components/settings/LanguageSelectionModal/LanguageSelectionModal";
 import WalletConnectionModal from "./components/settings/WalletConnectionModal/WalletConnectionModal";
-import { useTonConnectCommands } from "./hooks/useTonConnectCommands";
+
 import { useWebApp } from "./hooks/useWebapp";
+import {  } from "./hooks/useMainContract";
+import { useSendTransaction } from "./hooks/useSendTransaction";
 // import {useEffect} from "react";
 // import { useMiniApp, useViewport, useSettingsButton } from "@telegram-apps/sdk-react";
 
@@ -28,7 +30,7 @@ const App = () => {
     sendWithdraw
   } = useMainContract();
 
-  const {sendUsdtTransaction} = useTonConnectCommands()
+  const {sendUsdtTransaction} = useSendTransaction()
 
   const { connected } = useTonConnect();
 
