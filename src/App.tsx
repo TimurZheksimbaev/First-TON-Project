@@ -108,9 +108,10 @@ const App = () => {
 
     return (
         <>
-            <div className="settingsIcon">
-                <Settings />
-            </div>
+        <div className="settingsIcon">
+            <Settings />
+        </div>
+
         <div className="container">
             <div className="connect-button">
                 <TonConnectButton/>
