@@ -1,0 +1,15 @@
+.settingsIconWrapper {
+  display: flex;
+  padding: 4px;
+  align-items: center;
+  border-radius: 32px;
+  background: rgba(65, 63, 64, 0.40);
+  backdrop-filter: blur(5px);
+  margin-top: var(--tg-content-safe-area-inset-top);
+  margin-right: 90px;
+}
+
+.settingsIcon {
+  width: 24px;
+  height: 24px;
+}
