@@ -107,83 +107,81 @@ const App = () => {
 
 
     return (
-        <>
-        <div className="settingsIcon">
-            <Settings />
-        </div>
-
-        <div className="container">
-            <div className="connect-button">
-                <TonConnectButton/>
-            </div>
-
-            <div></div>
-
-            <div className="content">
-                <div className="card">
-                    <h2 className="card-title">Contract Details</h2>
-
-                    <div className="card-content">
-                        <div className="detail-item">
-                            {/* <b>{WebApp.platform}</b> */}
-                            <h3>Contract Address</h3>
-                            <p className="mono">{contract_address?.slice(0, 30) + "..."}</p>
-                        </div>
-
-                        <div className="detail-item">
-                            <h3>Contract Balance</h3>
-                            <p className="balance">
-                                {contract_balance ? `${fromNano(contract_balance)} TON` : "Loading..."}
-                            </p>
-                        </div>
-
-                        <div className="detail-item counter">
-                            <h3>Counter Value</h3>
-                            <p className="counter-value">
-                                {counter_value ?? "Loading..."}
-                            </p>
-                        </div>
-                    </div>
+        <div className="app">
+            <header className="header">
+                <div className="header__settings">
+                    <Settings/>
                 </div>
+                <div className="header__wallet">
+                    <TonConnectButton/>
+                </div>
+            </header>
 
-                <button onClick={() => openModal(MODALS.SETTINGS)} className="btn btn-blue">
-                    Show Alert
-                </button>
-                <br/>
+            <div className="container">
+                <div className="content">
+                    <div className="card">
+                        <h2 className="card-title">Contract Details</h2>
 
-                {connected && (
-                    <div className="button-group">
-                        <button onClick={() => sendIncrement()} className="btn btn-blue">
-                            Increment by 5
-                        </button>
+                        <div className="card-content">
+                            <div className="detail-item">
+                                {/* <b>{WebApp.platform}</b> */}
+                                <h3>Contract Address</h3>
+                                <p className="mono">{contract_address?.slice(0, 30) + "..."}</p>
+                            </div>
 
-                        <button onClick={() => sendDeposit()} className="btn btn-green">
-                            Deposit 1 TON
-                        </button>
+                            <div className="detail-item">
+                                <h3>Contract Balance</h3>
+                                <p className="balance">
+                                    {contract_balance ? `${fromNano(contract_balance)} TON` : "Loading..."}
+                                </p>
+                            </div>
 
-                        <button onClick={() => sendWithdraw()} className="btn btn-purple">
-                            Request 0.7 TON withdraw
-
-                        </button>
-
-                        <button onClick={() => sendUsdtTransaction(1.99)} className="btn btn-orange">
-                            Send 5 USDT to another address
-                        </button>
+                            <div className="detail-item counter">
+                                <h3>Counter Value</h3>
+                                <p className="counter-value">
+                                    {counter_value ?? "Loading..."}
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                )}
 
-                {!connected && (
-                    <div className="connect-message">
-                        <p>Connect your wallet to interact with the contract</p>
-                    </div>
-                )}
+                    <button onClick={() => openModal(MODALS.SETTINGS)} className="btn btn-blue">
+                        Show Alert
+                    </button>
+                    <br/>
+
+                    {connected && (
+                        <div className="button-group">
+                            <button onClick={() => sendIncrement()} className="btn btn-blue">
+                                Increment by 5
+                            </button>
+
+                            <button onClick={() => sendDeposit()} className="btn btn-green">
+                                Deposit 1 TON
+                            </button>
+
+                            <button onClick={() => sendWithdraw()} className="btn btn-purple">
+                                Request 0.7 TON withdraw
+
+                            </button>
+
+                            <button onClick={() => sendUsdtTransaction(1.99)} className="btn btn-orange">
+                                Send 5 USDT to another address
+                            </button>
+                        </div>
+                    )}
+
+                    {!connected && (
+                        <div className="connect-message">
+                            <p>Connect your wallet to interact with the contract</p>
+                        </div>
+                    )}
+                </div>
+                <SettingsModal/>
+                <LanguageSelectionModal/>
+                <WalletConnectionModal/>
             </div>
-            <SettingsModal/>
-            <LanguageSelectionModal/>
-            <WalletConnectionModal/>
         </div>
-        </>
-
     );
 };
 
