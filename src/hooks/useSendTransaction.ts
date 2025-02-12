@@ -1,8 +1,4 @@
 import {
-  useTonConnectModal,
-  useTonAddress,
-  useTonWallet,
-  useTonConnectUI,
   CHAIN,
 } from "@tonconnect/ui-react";
 import { useCallback } from "react";

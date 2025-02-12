@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { MainContract } from "../contracts/MainContract";
-import { useTonClient } from "./useTonClient";
 import { useAsyncInitialize } from "./useAsyncInitialize";
 import { Address, OpenedContract, toNano } from "@ton/core";
 import { useTonConnect } from "./useTonConnect";
@@ -8,7 +7,7 @@ import { useTonConnect } from "./useTonConnect";
 
 
 export function useMainContract() {
-  const client = useTonClient();
+  const {tonClient} = useTonConnect();
   const { sender } = useTonConnect()
   const sleep = (time: number) => new Promise((resolve) => setTimeout(resolve, time))
 
@@ -20,12 +19,12 @@ export function useMainContract() {
   const [balance, setBalance] = useState<null | number>(0)
 
   const mainContract = useAsyncInitialize(async () => {
-    if (!client) return;
+    if (!tonClient) return;
     const contract = new MainContract(
       Address.parse("EQB3OapcNoXeiz7NaEWTNx8mpK1ILK4FuMSUR-pxzzqvRxbz") // replace with your address from tutorial 2 step 8
     );
-    return client.open(contract) as OpenedContract<MainContract>;
-  }, [client]);
+    return tonClient.open(contract) as OpenedContract<MainContract>;
+  }, [tonClient]);
 
   useEffect(() => {
     async function getValue() {
