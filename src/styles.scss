@@ -51,12 +51,13 @@ body {
   //left: 0;
   //right: 0;
   z-index: 100;
+  padding: 0;
   top: var(--tg-safe-area-inset-top);
   right: var(--tg-safe-area-inset-right);
   left: var(--tg-safe-area-inset-left);
 
   &__settings {
-    position: fixed;
+    position: absolute;
     right: 90px;
   }
 
