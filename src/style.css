@@ -9,6 +9,11 @@
     background-color: #f5f5f5;
     color: #333;
   }
+
+  .settingsIcon {
+    margin-top: var(--tg-content-safe-area-inset-top);
+    margin-right: 90px;
+  }
   
   .container {
     min-height: 100vh;

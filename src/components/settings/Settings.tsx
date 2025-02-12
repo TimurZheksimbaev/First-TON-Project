@@ -7,7 +7,7 @@ export const Settings = () => {
     const {openModal} = useModal()
     return (
         <div className={styles.settingsIconWrapper} onClick={() => openModal(MODALS.SETTINGS)}>
-            <img className={styles.settingsIcon} src={settings} alt="Settings" />
+            <img className={styles.settingsIcon} src={settings} alt="Settings"/>
         </div>
     );
 }
